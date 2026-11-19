@@ -1,57 +1,108 @@
-# PEVŠ FI Thesis LaTeX Template
+# Šablóna záverečnej práce PEVŠ FI v LaTeXu
 [![CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-Official LaTeX template for bachelor/master thesis at [Pan-European University](https://www.paneurouni.com), Faculty of Informatics
+Oficiálna LaTeX šablóna bakalárskej a diplomovej práce na [Paneurópskej vysokej škole](https://www.paneurouni.com), Fakulte informatiky.
 
-## Features
+## Vlastnosti
 
-- 📚 Bibliography according to STN ISO 690
-- 🔧 Easy customization
-- 🤖 Automatic list generation
-- 📝 Glossary/Acronym support
-- 🖼️ Figure management
-- 💻 Code listing support
+- 📚 Bibliografia podľa normy STN ISO 690
+- 🔧 Jednoduché prispôsobenie
+- 🤖 Automatické generovanie zoznamov
+- 📝 Podpora zoznamu skratiek (glossaries)
+- 🖼️ Správa obrázkov
+- 💻 Podpora výpisov zdrojového kódu
 
-## Prerequisites
+## Požiadavky
 
-- LaTeX distribution (e.g., TexLive)
-- VSCode (optional)
+- Distribúcia LaTeXu – odporúčame **TeX Live** v plnej inštalácii (na macOS sa volá **MacTeX**)
+- VS Code (voliteľné)
 
-## Setup
+## Inštalácia LaTeXu
 
-### Getting the Template
-There are three ways to get started:
+Šablóna potrebuje `pdflatex`, `biber` a `makeglossaries`. Všetky sú súčasťou plnej inštalácie TeX Live, preto ju odporúčame na všetkých systémoch.
 
-1. **Use as Template** (Recommended)
-   - Visit the [GitHub repository](https://github.com/PEVS-FI/thesis-template)
-   - Click the green "Use this template" button in the top right
-   - Select "Create a new repository"
-   - Follow the prompts to create your own repository
+### Windows
 
-3. **Download Release**
-   - Visit the [GitHub repository](https://github.com/PEVS-FI/thesis-template)
-   - Download latest release
-   - Extract the downloaded file to your preferred location
+1. Stiahnite inštalátor [install-tl-windows.exe](https://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe).
+2. Spustite ho a nechajte zvolenú plnú schému (*full scheme*). Inštalácia trvá dlhšie a sťahuje niekoľko GB.
+3. Inštalátor pridá TeX Live do systémovej cesty (PATH). Po inštalácii otvorte **nové** okno PowerShellu alebo príkazového riadka.
 
-### Customizing Content
-After obtaining the template:
+TeX Live pre Windows obsahuje vlastný Perl, takže `makeglossaries` funguje bez ďalšej inštalácie. Podrobnosti sú na stránke [TeX Live on Windows](https://tug.org/texlive/windows.html).
 
-- Edit `metadata.tex` and fill out the metadata section, be carefull to choose type based on your studies bachelor/master
-- Replace `essentials/assignment.pdf` with your own assignment
-- Edit `essentials/abstract.tex` with your abstract
-- Edit `essentials/acknowledgment.tex` and `essentials/declaration.tex` if necessary
+### macOS
 
-> **Note**: Remove *Consultant* row from the `metadata.tex` if not needed.
+Nainštalujte MacTeX jedným zo spôsobov:
+
+- stiahnite [MacTeX.pkg](https://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg) a spustite ho (viac na [tug.org/mactex](https://www.tug.org/mactex/)), alebo
+- cez [Homebrew](https://brew.sh):
+  ```bash
+  brew install --cask mactex
+  ```
+
+Po inštalácii otvorte nové okno Terminálu. Ak `biber` hlási chybu, pozrite časť [Riešenie problémov](#riešenie-problémov).
+
+### Linux
+
+**Debian / Ubuntu:**
+```bash
+sudo apt update
+sudo apt install texlive-full
+```
+
+**Fedora:**
+```bash
+sudo dnf install texlive-scheme-full
+```
+
+**Iné distribúcie:** použite oficiálny inštalátor podľa návodu [TeX Live – quick install](https://tug.org/texlive/quickinstall.html).
+
+### Overenie inštalácie
+
+Na všetkých systémoch spustite v termináli (Windows: PowerShell):
+```bash
+pdflatex --version
+biber --version
+makeglossaries --version
+```
+Každý príkaz má vypísať verziu. Ak systém príkaz nenájde, otvorte nové okno terminálu alebo skontrolujte PATH.
+
+## Nastavenie
+
+### Získanie šablóny
+Šablónu môžete získať dvoma spôsobmi:
+
+1. **Použitie ako šablóny** (odporúčané)
+   - Otvorte [GitHub repozitár](https://github.com/PEVS-FI/thesis-template)
+   - Vpravo hore kliknite na zelené tlačidlo „Use this template“
+   - Zvoľte „Create a new repository“
+   - Podľa pokynov vytvorte vlastný repozitár
+
+2. **Stiahnutie vydania**
+   - Otvorte [GitHub repozitár](https://github.com/PEVS-FI/thesis-template)
+   - Stiahnite najnovšie vydanie (release)
+   - Rozbaľte stiahnutý súbor na zvolené miesto
+
+### Úprava obsahu
+Po získaní šablóny:
+
+- Upravte `metadata.tex` a vyplňte metadáta; dbajte na správny typ práce podľa štúdia (bakalárska/diplomová)
+- Nahraďte `essentials/assignment.pdf` vlastným zadaním
+- Do `essentials/abstract.tex` napíšte abstrakt
+- Podľa potreby upravte `essentials/acknowledgment.tex` a `essentials/declaration.tex`
+
+> **Poznámka**: Ak nemáte konzultanta, nechajte riadok *Consultant* v `metadata.tex` zakomentovaný.
+
+> **Poznámka**: Text čestného vyhlásenia (vrátane vyhlásenia o použití nástrojov umelej inteligencie) je v `lang/slovak.tex` a `lang/english.tex` v makre `\lndeclarationtext`. Súbor `essentials/declaration.tex` ho iba vykresľuje.
 
 
-### VS Code Setup
+### Nastavenie VS Code
 
-1. Install LaTeX Workshop extension
-2. Set citation backend to `biblatex`
-3. Add `makeglossaries` and `biber` to `latex-workshop.latex.tools`
-4. Add a build recipe to `latex-workshop.latex.recipes`
+1. Nainštalujte rozšírenie LaTeX Workshop
+2. Nastavte citačný backend na `biblatex`
+3. Pridajte `makeglossaries` a `biber` do `latex-workshop.latex.tools`
+4. Pridajte recept zostavenia do `latex-workshop.latex.recipes`
 
-Example build recipe:
+Príklad receptu:
 ```json
 {
     "name": "pdflatex ➞ makeglossaries ➞ biber ➞ pdflatex × 2",
@@ -64,14 +115,14 @@ Example build recipe:
     ]
 } 
 ```
-To use a specific recipe for your document, add this line at the beginning of `main.tex` (replace *recipe-name*):
+Ak chcete pre dokument použiť konkrétny recept, pridajte na začiatok `main.tex` tento riadok (*recipe-name* nahraďte názvom receptu):
 ```tex
 %!LW recipe=recipe-name
 ```
 
-### Building the Document
+### Zostavenie dokumentu
 
-Either use VS Code's LaTeX Workshop build button or run:
+Použite tlačidlo Build v rozšírení LaTeX Workshop vo VS Code, alebo v priečinku projektu (tam, kde je `main.tex`) spustite:
 
 ```bash
 pdflatex main
@@ -81,41 +132,43 @@ pdflatex main
 pdflatex main
 ```
 
-### Project Structure
+Príkazy sú rovnaké na Windows (PowerShell aj príkazový riadok), macOS aj Linuxe. Výsledkom je súbor `main.pdf`.
+
+### Štruktúra projektu
 
 ```
 .
 ├── essentials/            
-│   ├── abstract.tex       # Abstract in SK/EN
-│   ├── acknowledgment.tex # Acknowledgments
-│   ├── acronyms.tex       # List of acronyms
-│   ├── appendices.tex     # List of appendices
-│   ├── bibliography.bib   # References
-│   ├── declaration.tex    # Author's declaration
-│   ├── titlepage.tex      # Main title page
-│   ├── titlepage-alt.tex  # Secondary title page
-│   └── assignment.pdf     # Assignment
+│   ├── abstract.tex       # Abstrakt SK/EN
+│   ├── acknowledgment.tex # Poďakovanie
+│   ├── acronyms.tex       # Zoznam skratiek
+│   ├── appendices.tex     # Zoznam príloh
+│   ├── bibliography.bib   # Použitá literatúra
+│   ├── declaration.tex    # Čestné vyhlásenie autora
+│   ├── titlepage.tex      # Hlavná titulná strana
+│   ├── titlepage-alt.tex  # Druhá titulná strana
+│   └── assignment.pdf     # Zadanie
 ├── examples/              
-│   └── examples.tex       # Example usage demonstrations
+│   └── examples.tex       # Ukážky použitia
 ├── lang/              
-│   ├── english.tex        # English language mutation
-│   └── slovak.tex         # Slovak language mutation
-├── metadata.tex           # Metadata of the thesis
-├── main.tex               # Main document
-└── README.md              # This file
+│   ├── english.tex        # Anglická jazyková mutácia
+│   └── slovak.tex         # Slovenská jazyková mutácia
+├── metadata.tex           # Metadáta práce
+├── main.tex               # Hlavný dokument
+└── README.md              # Tento súbor
 ```
-## Usage
+## Použitie
 
-### Adding content
+### Pridávanie obsahu
 
-You can start writing your thesis in the **Document Body** section of the `main.tex` file:
+Prácu môžete začať písať v časti **Document Body** súboru `main.tex`:
 ```tex
 %%%%%%% DOCUMENT BODY %%%%%%%
 \section{Úvod}
-Your content here...
+Váš text...
 ```
 
-For better organization, split your content into separate files:
+Pre lepšiu prehľadnosť rozdeľte obsah do samostatných súborov:
 ```tex
 % %%%%%%% DOCUMENT BODY %%%%%%%
 \include{chapters/introduction}
@@ -123,11 +176,11 @@ For better organization, split your content into separate files:
 \include{chapters/summary}
 ```
 
-The `examples` section is mostly defined by the university, use it as a reference.
-> **Note**: Remove `\include{examples/examples}` from `main.tex` in your final build.
+Časť `examples` je prevažne určená univerzitou, používajte ju ako vzor.
+> **Poznámka**: Vo finálnej verzii odstráňte z `main.tex` riadok `\include{examples/examples}`.
 
-### Bibliography
-References are stored in `essentials/bibliography.bib` and displayed using the **STN ISO 690** norm. Examples are provided in file.
+### Bibliografia
+Zdroje sú uložené v `essentials/bibliography.bib` a zobrazujú sa podľa normy **STN ISO 690**. Príklady nájdete priamo v súbore.
 
 ```bibtex
 @book{borgman2003from,
@@ -143,105 +196,121 @@ langid = {english},
 }
 ```
 
-You can optionally set the citation style in `main.tex` bibliography section with `style=style-name`.
+Citačný štýl môžete voliteľne nastaviť v časti bibliografie v `main.tex` parametrom `style=nazov-stylu`.
 
-Available styles are: `iso-authoryear`(default) and `iso-numeric`. More info in the **Citation** section.
+Dostupné štýly sú `iso-authoryear` (predvolený) a `iso-numeric`. Viac v časti **Citovanie**.
 
-> **Note**: Editing bibliography requires rebuilding your document using the full build recipe.
+> **Poznámka**: Po úprave bibliografie treba dokument zostaviť celým postupom (vrátane `biber`).
 
-### Citation
-Template supports two citation styles:
+### Citovanie
+Šablóna podporuje dva citačné štýly:
 
-1. **Author-Year Style** (`iso-authoryear`)
-   - Using `\parencite{}` will add parenthesis around the reference
-   - Format: `\parencite{key}` → (Author, Year)
-   - Example: `\parencite{knuth1984}` → (Knuth, 1984)
+1. **Štýl autor–rok** (`iso-authoryear`)
+   - `\parencite{}` vloží odkaz v zátvorkách
+   - Formát: `\parencite{key}` → (Autor, Rok)
+   - Príklad: `\parencite{knuth1984}` → (Knuth, 1984)
    ---
-   - Using `\textcite{}` will add reference in text
-   - Format: `\textcite{key}` → Author, Year
-   - Example: `\textcite{knuth1984}` → Knuth, 1984
+   - `\textcite{}` vloží odkaz priamo do textu
+   - Formát: `\textcite{key}` → Autor, Rok
+   - Príklad: `\textcite{knuth1984}` → Knuth, 1984
 
 
-2. **Numeric Style** (`iso-numeric`)
-   - Using `\cite{}` will add number `[X]` in text and sort references by occurence   
-   - Format: `\cite{key}` → [1]
-   - Example: `\cite{knuth1984}` → [1]
+2. **Číselný štýl** (`iso-numeric`)
+   - `\cite{}` vloží do textu číslo `[X]` a zdroje zoradí podľa poradia výskytu
+   - Formát: `\cite{key}` → [1]
+   - Príklad: `\cite{knuth1984}` → [1]
    
 
-> **Note**: Change citation style by modifying the `style` parameter in `main.tex`:
+> **Poznámka**: Citačný štýl zmeníte parametrom `style` v `main.tex`:
 > ```tex
 > \usepackage[
->     style=iso-authoryear, % or iso-numeric
+>     style=iso-authoryear, % alebo iso-numeric
 > ]{biblatex}
 > ```
 
-### Acronyms
-Acronyms are stored in `essentials/acronyms.tex`.
+### Skratky
+Skratky sú uložené v `essentials/acronyms.tex`.
 
-#### Adding New Acronyms
-Add new acronyms to the end of `essentials/acronyms.tex` using this template:
+#### Pridanie novej skratky
+Nové skratky pridajte na koniec `essentials/acronyms.tex` podľa tohto vzoru:
 ```tex
 \newacronym
-    [description={Your description here}]
-    {label}{SHORT}{Long Form}
+    [description={Váš popis}]
+    {label}{SKRATKA}{Celý názov}
 ```
 
-Example:
+Príklad:
 ```tex
 \newacronym
     [description={Visual modeling language for software design and architecture}]
     {UML}{UML}{Unified Modeling Language}
 ```
 
-#### Using Acronyms
-Use acronyms in your text with the `\gls{label}` command:
-- **First use displays:** "Long Form (SHORT)"
-- **Subsequent uses display only:** "SHORT"
+#### Používanie skratiek
+Skratku v texte použijete príkazom `\gls{label}`:
+- **Prvé použitie zobrazí:** „Celý názov (SKRATKA)“
+- **Ďalšie použitia zobrazia iba:** „SKRATKA“
 
-Example:
+Príklad:
 ```tex
-First use: \gls{UML} will show "Unified Modeling Language (UML)"
-Second use: \gls{UML} will show just "UML"
+Prvé použitie: \gls{UML} zobrazí „Unified Modeling Language (UML)“
+Druhé použitie: \gls{UML} zobrazí iba „UML“
 ```
 
-> **Note**: Adding or modifying acronyms requires rebuilding your document using the full build recipe.
+> **Poznámka**: Po pridaní alebo úprave skratiek treba dokument zostaviť celým postupom (vrátane `makeglossaries`).
 
-### Images
+### Obrázky
 
-#### Default Configuration
-All images are automatically centered on the page and sized to 90% of text width.
+#### Predvolené nastavenie
+Všetky obrázky sa automaticky centrujú a ich šírka je 90 % šírky textu.
 
-> **Note**: Default settings can be modified in `main.tex` in the **Default image options** section
+> **Poznámka**: Predvolené nastavenie môžete zmeniť v `main.tex` v časti **Default image options**.
 
-#### Basic Usage
-Insert an image with caption:
+#### Základné použitie
+Vloženie obrázka s popisom:
 ```tex
 \begin{figure}[h]
-    \includegraphics{path/to/your-image}
-    \caption{Your caption here}
-    \label{fig:unique-label}
+    \includegraphics{cesta/k/obrazku}
+    \caption{Váš popis}
+    \label{fig:unikatny-label}
 \end{figure}
 ```
 
-You can override default settings per image with arguments like:
+Predvolené nastavenie môžete pre jednotlivý obrázok zmeniť argumentmi, napríklad:
 ```tex
 \includegraphics[height=0.75\textwidth,angle=90]{image/to/rotate.png}
 ```
-### Code Blocks
+### Výpisy kódu
 
-Add a new codeblock and specify the language with:
+Nový výpis kódu so zadaným jazykom vložíte takto:
 ```tex
-\begin{lstlisting}[language=Python, caption={Your caption}, label={lst:python-example}]    
-Your code here...
+\begin{lstlisting}[language=Python, caption={Váš popis}, label={lst:python-example}]    
+Váš kód...
 \end{lstlisting}
 ```
 
-> **Note**: Default settings can be modified in `main.tex` in the **Code blocks** section
+> **Poznámka**: Predvolené nastavenie môžete zmeniť v `main.tex` v časti **Code blocks**.
 
-## License
+## Riešenie problémov
 
-This work is dedicated to the public domain under the CC0 1.0 Universal license.
+### macOS: `biber` hlási „extracting arm64 binary with lipo failed“
+
+Na macOS 27 zlyhá `biber` z TeX Live 2025 s chybou:
+```
+biber: extracting arm64 binary with lipo failed (wstatus=256)
+```
+Univerzálny `biber` sa pri spustení rozbaľuje príkazom `lipo -extract_family`, ktorý `/usr/bin/lipo` na macOS 27 nepodporuje. Obchádzka: vytvorte si arm64 verziu `biber` a dajte ju do PATH pred TeX Live:
+```bash
+mkdir -p ~/bin
+lipo /usr/local/texlive/2025/bin/universal-darwin/biber -thin arm64 -output ~/bin/biber
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+```
+Potom otvorte nové okno Terminálu a overte `biber --version`. Pri inom ročníku TeX Live upravte v ceste rok (`2025`).
+
+## Licencia
+
+Toto dielo je uvoľnené do verejnej domény pod licenciou CC0 1.0 Universal.
 
 [![CC0](https://i.creativecommons.org/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-To the extent possible under law, author has waived all copyright and related or neighboring rights to this work.
+V rozsahu, v akom to zákon dovoľuje, sa autor vzdal všetkých autorských a súvisiacich práv k tomuto dielu.
